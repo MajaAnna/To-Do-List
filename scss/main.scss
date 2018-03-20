@@ -1,3 +1,25 @@
+
+table {
+  text-align: center;
+}
+
+.table_top {
+  background-color: rgba(190, 190, 190, 0.69);
+}
+
+textarea {
+  resize: none;
+}
+
+form {
+  margin-top: 5px;
+}
+
+.btn-primary {
+  padding: 10px 20px;
+  margin-top: 15px;
+}
+
 $lightest-color:#e6e8e1;
 $darkest-color:#373331;
 $accent-color:#d18040;
@@ -21,3 +43,4 @@ header span{
 .accent{
   background-color: $accent-color;
 }
+

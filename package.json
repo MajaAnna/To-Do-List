@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/CodersLab-core/FE_Egzamin_3#readme",
   "dependencies": {
+    "bootstrap": "^4.0.0",
     "gulp": "^3.9.1",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^1.12.1"
