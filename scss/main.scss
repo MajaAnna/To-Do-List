@@ -31,6 +31,10 @@ html body{
   font-family: 'Lato', sans-serif;
 }
 
+body{
+  background: url("../images/preparing-for-travel_925x.jpg") no-repeat center/cover;
+}
+
 header, footer{
   background-color: $darkest-color;
   color: $lightest-color;
