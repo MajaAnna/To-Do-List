@@ -8,111 +8,116 @@
     <meta name="description" content="A small responsive application dedicated to people, who have a lot to deal with!">
     <meta http-equiv="X-Ua-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&amp;subset=latin-ext" rel="stylesheet">
     <!--Bootstrap-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--google fonts, fontello and css-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&amp;subset=latin-ext" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="fontello/css/fontello.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 </head>
 <body>
     <div class="bg-img">
-    <div class="container">
+        <div class="container">
 
-    <!--Header-->
-    <header>
-        <h1>To-Do-List</h1>
-        <p>too much thoughts on your mind?... We are here to help you!</p>
-    </header>
+        <!--Header-->
+        <header>
+            <h1>To-<span class="accent-txt">Do</span>-List<i class="icon-list-alt icon"></i></h1>
+            <p>too much thoughts on your mind?... We are here to help you!</p>
+        </header>
 
-    <main>
-        <!--Add button-->
-        <section>
-            <button id="main_btn" class="btn btn-success btn-md btn-block container">Dodaj</button>
-        </section>
+        <main>
+            <!--Add button-->
+            <section>
+                <button id="main_btn" class="btn btn-success btn-md btn-block container">Dodaj</button>
+            </section>
 
 
-        <!--Form section-->
-        <section>
-            <div class="container">
-                <form id="form" role="form">
-                    <div class="form-group">
+            <!--Form section-->
+            <section>
+                <div class="container">
+                    <form id="form" role="form">
+                        <div class="form-group">
 
-                        <label for="date" class="control-label col-md-3">Termin</label>
-                        <div class="col-md-4">
-                            <input type="date" class="form-control input_control validation_required" id="date">
+                            <label for="date" class="control-label col-md-3">Termin</label>
+                            <div class="col-md-4">
+                                <input type="date" class="form-control input_control validation_required" id="date">
+                            </div>
+
+                            <label for="name" class="control-label col-md-3">Temat zadania</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control input_control validation_required" id="name" placeholder="Wpiś temat zadania">
+                            </div>
+
+                            <label for="priority" class="control-label col-md-3">Priorytet</label>
+                            <div class="col-md-4">
+                                <select class="form-control" id="priority">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                               <p class="help-block">1 to najważniejsze, 5 to najmniej istotne</p>
+                            </div>
+
+                                <label for="comment" class="control-label col-md-3">Opis</label>
+                            <div class="col-md-5">
+                                <textarea class="form-control input_control validation_required" rows="5" id="comment" ></textarea>
+                            </div>
+                            <div class="col-md-5">
+                                <input type="submit" class="btn btn-primary" value="Dodaj" id="btn_submit">
+                            </div>
                         </div>
-
-                        <label for="name" class="control-label col-md-3">Temat zadania</label>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control input_control validation_required" id="name" placeholder="Wpiś temat zadania">
-                        </div>
-
-                        <label for="priority" class="control-label col-md-3">Priorytet</label>
-                        <div class="col-md-4">
-                            <select class="form-control" id="priority">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
-                           <p class="help-block">1 to najważniejsze, 5 to najmniej istotne</p>
-                        </div>
-
-                            <label for="comment" class="control-label col-md-3">Opis</label>
-                        <div class="col-md-5">
-                            <textarea class="form-control input_control validation_required" rows="5" id="comment" ></textarea>
-                        </div>
-                        <div class="col-md-5">
-                            <input type="submit" class="btn btn-primary" value="Dodaj" id="btn_submit">
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
+            </section>
+            <!--Table section-->
+            <br>
+            <div class="table-responsive container">
+                <table class="table table-bordered table-hover">
+                    <thead class="table_top">
+                        <tr>
+                            <th>Termin</th>
+                            <th>Temat zadania</th>
+                            <th>Priorytet</th>
+                            <th>Opis</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>12.12.2018</th>
+                            <th>ToDoList</th>
+                            <th>1</th>
+                            <th>Cos bardzo wazne</th>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-        </section>
-        <!--Table section-->
-        <br>
-        <div class="table-responsive container">
-            <table class="table table-bordered table-hover">
-                <thead class="table_top">
-                    <tr>
-                        <th>Termin</th>
-                        <th>Temat zadania</th>
-                        <th>Priorytet</th>
-                        <th>Opis</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th>12.12.2018</th>
-                        <th>ToDoList</th>
-                        <th>1</th>
-                        <th>Cos bardzo wazne</th>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <br>
+            <br>
 
-        <!--List items-->
-        <ul>
-            <li>This will be a new element
-                <button>Done</button>
-                <button>Change</button>
-                <button>Delete</button></li>
-        </ul>
-    </main>
+            <!--List items-->
+            <ul>
+                <li>This will be a new element
+                    <button>Done</button>
+                    <button>Change</button>
+                    <button>Delete</button></li>
+            </ul>
+        </main>
 
-    <!--Footer-->
-    <footer>
-        <div>Contact us via email: bababa@gmail.com</div>
-        <p>Was nice to see ya! Good luck! &copy2018;</p>
-        <div>Find us here:</div>
-    </footer>
+        <!--Footer-->
+        <footer>
+            <div class="row">
+                <div class="col-4">Contact us via <span class="accent-txt">email:</span> <br>
+                    bababa@gmail.com <i class="icon-mail-alt"></i>
+                </div>
+                <div class="col-4">Was nice to see ya! Good luck! &copy2018;</div>
+                <div class="col-4">Find us here:<br>
+                    <a href="https://www.facebook.com/"><i class="icon-facebook"></i></a>
+                    <a href="https://plus.google.com/"><i class="icon-gplus"></i></a>
+                </div>
+            </div>
+        </footer>
         </div>
     </div>
 
