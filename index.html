@@ -39,18 +39,18 @@
                     <form id="form" role="form">
                         <div class="form-group">
 
-                            <label for="date" class="control-label col-md-3">Termin</label>
-                            <div class="col-md-4">
+                            <label for="date" class="control-label col-md-11">Termin</label>
+                            <div class="col-md-11">
                                 <input type="date" class="form-control input_control validation_required" id="date">
                             </div>
 
-                            <label for="name" class="control-label col-md-3">Temat zadania</label>
-                            <div class="col-md-4">
+                            <label for="name" class="control-label col-md-11">Temat zadania</label>
+                            <div class="col-md-11">
                                 <input type="text" class="form-control input_control validation_required" id="name" placeholder="Wpiś temat zadania">
                             </div>
 
-                            <label for="priority" class="control-label col-md-3">Priorytet</label>
-                            <div class="col-md-4">
+                            <label for="priority" class="control-label col-md-11">Priorytet</label>
+                            <div class="col-md-11">
                                 <select class="form-control" id="priority">
                                     <option>1</option>
                                     <option>2</option>
@@ -61,11 +61,11 @@
                                <p class="help-block">1 to najważniejsze, 5 to najmniej istotne</p>
                             </div>
 
-                                <label for="comment" class="control-label col-md-3">Opis</label>
-                            <div class="col-md-5">
+                                <label for="comment" class="control-label col-md-11">Opis</label>
+                            <div class="col-md-11">
                                 <textarea class="form-control input_control validation_required" rows="5" id="comment" ></textarea>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-11">
                                 <input type="submit" class="btn btn-primary" value="Dodaj" id="btn_submit">
                             </div>
                         </div>
@@ -75,7 +75,7 @@
             <!--Table section-->
             <br>
             <div class="table-responsive container">
-                <table class="table table-bordered table-hover">
+                <table class="table table-bordered table-hover" id="table">
                     <thead class="table_top">
                         <tr>
                             <th>Termin</th>
@@ -84,13 +84,8 @@
                             <th>Opis</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <th>12.12.2018</th>
-                            <th>ToDoList</th>
-                            <th>1</th>
-                            <th>Cos bardzo wazne</th>
-                        </tr>
+                    <tbody id="tbody">
+
                     </tbody>
                 </table>
             </div>
