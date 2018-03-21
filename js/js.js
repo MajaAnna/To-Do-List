@@ -7,16 +7,29 @@ document.addEventListener('DOMContentLoaded', function () {
         authorName = document.querySelector('#name'),
         priority = document.querySelector('#priority'),
         comment = document.querySelector('#comment'),
-        table = document.querySelector('.table-bordered tbody'),
+        table = document.getElementById('table'),
+        tableBody = document.getElementById('tbody'),
 
         inputControl = document.getElementsByClassName('validation_required');
 
-/*Przycisk pokazuje formularz do dodawania zadania*/
+    /* Nie wiem gdzie wszdzić */
+
+    function showHideTable() {
+
+        if (tableBody.children.length === 0) {
+            table.hidden = true;
+        } else {
+            table.hidden = false;
+        }
+    }
+
+    /*Przycisk pokazuje formularz do dodawania zadania*/
 
     hideShowFormBtn.addEventListener('click', function (e) {
         e.preventDefault();
         form.hidden = !form.hidden;
     });
+
 
     addTaskBtn.addEventListener('click', function (e) {
         e.preventDefault();
@@ -58,4 +71,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 });
+
+
 
