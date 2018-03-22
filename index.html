@@ -39,31 +39,31 @@
                     <form id="form" role="form">
                         <div class="form-group">
 
-                            <label for="date" class="control-label col-md-11">Termin</label>
-                            <div class="col-md-11">
-                                <input type="date" class="form-control input_control validation_required" id="date">
+                            <label for="date" class="control-label col-md-12">Termin</label>
+                            <div class="col-md-12">
+                                <input type="date" class="form-control validation_required" id="date">
                             </div>
 
-                            <label for="name" class="control-label col-md-11">Temat zadania</label>
-                            <div class="col-md-11">
-                                <input type="text" class="form-control input_control validation_required" id="name" placeholder="Wpiś temat zadania">
+                            <label for="name" class="control-label col-md-12">Temat zadania</label>
+                            <div class="col-md-12">
+                                <input type="text" class="form-control validation_required" id="name" placeholder="Wpiś temat zadania">
                             </div>
 
-                            <label for="priority" class="control-label col-md-11">Priorytet</label>
-                            <div class="col-md-11">
-                                <select class="form-control" id="priority">
+                            <label for="priority" class="control-label col-md-12">Priorytet</label>
+                            <div class="col-md-12">
+                                <select class="form-control validation_required" id="priority">
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
                                     <option>4</option>
                                     <option>5</option>
                                 </select>
-                               <p class="help-block">1 to najważniejsze, 5 to najmniej istotne</p>
+                               <p class="help-block">1 to najważniejsze<br> 5 to najmniej istotne</p>
                             </div>
 
-                                <label for="comment" class="control-label col-md-11">Opis</label>
-                            <div class="col-md-11">
-                                <textarea class="form-control input_control validation_required" rows="5" id="comment" ></textarea>
+                                <label for="comment" class="control-label col-md-12">Opis</label>
+                            <div class="col-md-12">
+                                <textarea class="form-control validation_required" rows="5" id="comment" ></textarea>
                             </div>
                             <div class="col-md-11">
                                 <input type="submit" class="btn btn-primary" value="Dodaj" id="btn_submit">
@@ -90,15 +90,7 @@
                 </table>
             </div>
             <br>
-
-            <!--List items-->
-            <ul>
-                <li>This will be a new element
-                    <button>Done</button>
-                    <button>Change</button>
-                    <button>Delete</button></li>
-            </ul>
-        </main>
+            <button id="removeFinishedTasksButton">Remove finished tasks</button>
 
         <!--Footer-->
         <footer>
