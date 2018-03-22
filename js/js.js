@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
             btnDelete.innerText = 'Usunąć';
             btnComplete.innerText = 'Wykonane';
 
+
         btnDelete.setAttribute("style", "background-color: rgba(255, 3, 21, 0.65);");
         btnComplete.setAttribute("style", "background-color: rgba(0, 128, 0, 0.65);");
         removeButton.setAttribute("style", "background-color: rgba(217, 213, 0, 0.65)");
