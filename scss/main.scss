@@ -92,3 +92,29 @@ label {
   margin: 0 auto;
   width: 300px;
 }
+
+.complete {
+  background-color: transparent;
+  td:not(:last-child) {
+    background-color: rgba(29, 222, 82, 0.81);
+  }
+}
+
+button {
+  background-color: rgba(217, 213, 0, 0.65);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+}
+
+.help-block {
+  color: rgb(0, 0, 0);
+  font-style: oblique;
+}
+
+
+
