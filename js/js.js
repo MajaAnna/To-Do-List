@@ -24,9 +24,13 @@ document.addEventListener('DOMContentLoaded', function () {
         form.hidden = !form.hidden;
     });
 
+    var counter = 0;
 
     addTaskBtn.addEventListener('click', function (e) {
         e.preventDefault();
+
+        counter++;
+        //console.log('counter' + counter);
 
         table_top.style.display = 'contents';
 
@@ -110,39 +114,40 @@ document.addEventListener('DOMContentLoaded', function () {
         */
         });
 
-        /*
-        btnDelete.innerText = 'Usunąć';
-        btnComplete.innerText = 'Wykonane';
-        */
-
         //LOCAL STORAGE
-        //tworzę prototyp obiektu
-        Task = {
-            id:"",
-            additionDate : "",
-            authorName : "",
-            priority : "",
-            comment : ""
-        };
+        //iteruję po ilości kliknięć na addTaskBtn
+        for(var i = 0; i < counter; i++){
 
-        //iteruję po poszczególnych taskach z tod_list
-        for(var i = 0; i < todo_list.length; i++){
+            //tablica, do której zapisywane będą poszczególne taski (obiekty)
+            var toDoList = [];
 
-            //zapisuję poszczególny task w obiekcie
-            var todo_list = Object.create(Task);
-            todo_list.id = 'i';
-            todo_list.additionDate = 'tdAdditionDate';
-            todo_listtasks.authorName = 'tdAuthor';
-            todo_list.priority = 'tdPriority';
-            todo_list.comment = 'tdTask';
+            //zapisuję tablicę do localStorage
+            localStorage.setItem('toDoList', '');
 
+            //obiekt tworzony przy każdej iteracji
+            var task = [
+                {
+                    id: 'i',
+                    additionDate :'tdAdditionDate',
+                    authorName: 'tdAuthor',
+                    priority : 'tdPriority',
+                    comment : 'tdTask'
+                }
+            ];
+
+            if(addTaskBtn === null){
+                toDoList.push(task[i]);
+            }
+
+            // Retrieve the object from storage
+            var retrievedObject = localStorage.getItem('toDoList', JSON.stringify(toDoList));
+            // parsing
+            var parsedObject = JSON.parse( localStorage.getItem('toDoList') );
         }
 
+
         window.localStorage
-        //Zapis
-        localStorage.setItem('todo_list', JSON.stringify( tasks ) );
-        //Odczyt:
-        var tasks = JSON.parse( localStorage.getItem('todo_list') );
+
 
 
     });
