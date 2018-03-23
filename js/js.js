@@ -110,7 +110,37 @@ document.addEventListener('DOMContentLoaded', function () {
 */
         });
 
+        /*
+        btnDelete.innerText = 'Usunąć';
+        btnComplete.innerText = 'Wykonane';
+        */
 
+        //tworzę prototyp obiektu
+        Task = {
+            id:"",
+            additionDate : "",
+            authorName : "",
+            priority : "",
+            comment : ""
+        };
+
+        //iteruję po poszczególnych taskach z tod_list
+        for(var i = 0; i < todo_list.length; i++){
+
+            //zapisuję poszczególny task w obiekcie
+            var todo_list = Object.create(Task);
+            todo_list.id = 'i';
+            todo_list.additionDate = 'tdAdditionDate';
+            todo_listtasks.authorName = 'tdAuthor';
+            todo_list.priority = 'tdPriority';
+            todo_list.comment = 'tdTask';
+
+        }
+
+        //Zapis
+        localStorage.setItem('todo_list', JSON.stringify( tasks ) );
+        //Odczyt:
+        var tasks = JSON.parse( localStorage.getItem('todo_list') );
 
 
     });
