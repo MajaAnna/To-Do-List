@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function () {
         removeButton = document.querySelector('#removeFinishedTasksButton'),
         table_top = document.getElementById('table_top'),
 
-
         inputControl = document.getElementsByClassName('validation_required');
 
     form.style.display = 'none';
@@ -30,13 +29,10 @@ document.addEventListener('DOMContentLoaded', function () {
         e.preventDefault();
 
         counter++;
-        //console.log('counter' + counter);
 
         table_top.style.display = 'contents';
 
-
         /* walidacja danych */
-
         for (var i=0; i<inputControl.length; i++) {
             if(inputControl[i] === undefined)
             {
@@ -70,7 +66,6 @@ document.addEventListener('DOMContentLoaded', function () {
         tdTask.innerText = comment.value;
 
         //czyszczenie inputa po zapisaniu zadania
-
         additionDate.value = '';
         authorName.value = '';
         priority.value = '';
