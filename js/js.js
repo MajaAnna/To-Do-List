@@ -100,14 +100,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 tr.parentElement.removeChild(tr);
                 console.log('Ok');
             }
-/* Nie działa
+            /* Nie działa
             if (tableBody.children.length === 0) {
                 table_top.style.display = 'none';
 
             } else {
                 table_top.style.display = 'contents';
             }
-*/
+        */
         });
 
         /*
@@ -115,6 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
         btnComplete.innerText = 'Wykonane';
         */
 
+        //LOCAL STORAGE
         //tworzę prototyp obiektu
         Task = {
             id:"",
@@ -137,6 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         }
 
+        window.localStorage
         //Zapis
         localStorage.setItem('todo_list', JSON.stringify( tasks ) );
         //Odczyt:
