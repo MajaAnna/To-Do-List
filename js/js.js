@@ -110,10 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         //LOCAL STORAGE
-        //iteruję po ilości kliknięć na addTaskBtn
-        for(var i = 0; i < counter; i++){
-
-            //tablica, do której zapisywane będą poszczególne taski (obiekty)
+         //tablica, do której zapisywane będą poszczególne taski (obiekty)
             var toDoList = [];
 
             //zapisuję tablicę do localStorage
@@ -122,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
             //obiekt tworzony przy każdej iteracji
             var task = [
                 {
-                    id: 'i',
+                    id: 'counter',
                     additionDate :'tdAdditionDate',
                     authorName: 'tdAuthor',
                     priority : 'tdPriority',
@@ -138,7 +135,6 @@ document.addEventListener('DOMContentLoaded', function () {
             var retrievedObject = localStorage.getItem('toDoList', JSON.stringify(toDoList));
             // parsing
             var parsedObject = JSON.parse( localStorage.getItem('toDoList') );
-        }
 
         window.localStorage
 
