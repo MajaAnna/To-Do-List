@@ -15,13 +15,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
         inputControl = document.getElementsByClassName('validation_required');
 
-        form.hidden = true;
+
         table.hidden = true;
         removeButton.hidden = true;
-
+        form.hidden = true;
 
         function hideEmptyTable() {
-            if(tr.parentNode == table_body) {
+            if(table_body.children.length === 0) {
                 table_top.hidden = true;
                 removeButton.hidden = true;
             } else {
@@ -37,7 +37,8 @@ document.addEventListener('DOMContentLoaded', function () {
         hideShowFormBtn.addEventListener('click', function (e) {
             e.preventDefault();
             form.hidden = !form.hidden;
-            if(tr.parentNode == table_body) {
+
+            if(tr.parentNode == table_top) {
                 table.hidden = false;
                 removeButton.hidden = false;
             }
