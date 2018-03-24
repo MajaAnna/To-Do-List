@@ -7,32 +7,54 @@ document.addEventListener('DOMContentLoaded', function () {
         authorName = document.querySelector('#name'),
         priority = document.querySelector('#priority'),
         comment = document.querySelector('#comment'),
-        removeButton = document.querySelector('#removeFinishedTasksButton'),
+        removeButton = document.getElementById('removeFinishedTasksButton'),
         table_top = document.getElementById('table_top'),
+        table = document.getElementById('table'),
+        table_body = document.getElementById('table_body'),
+
 
         inputControl = document.getElementsByClassName('validation_required');
 
+
+    table.hidden = true;
+    removeButton.hidden = true;
     form.hidden = true;
-    //table_top.style.display = 'none';
+
+    function hideEmptyTable() {
+        if(table_body.children.length === 0) {
+            table_top.hidden = true;
+            removeButton.hidden = true;
+        } else {
+            table_top.hidden = false;
+            removeButton.hidden = false;
+        }
+    }
+
+
 
     /*Przycisk pokazuje formularz do dodawania zadania*/
 
     hideShowFormBtn.addEventListener('click', function (e) {
         e.preventDefault();
-        //form.style.display = 'block';
         form.hidden = !form.hidden;
+
+        if(tr.parentNode == table_top) {
+            table.hidden = false;
+            removeButton.hidden = false;
+        }
     });
 
-    var counter = 0;
 
     addTaskBtn.addEventListener('click', function (e) {
         e.preventDefault();
 
-        counter++;
+        table.hidden = false;
+        table_top.hidden = false;
+        removeButton.hidden = false;
 
-        table_top.style.display = 'contents';
 
         /* walidacja danych */
+
         for (var i=0; i<inputControl.length; i++) {
             if(inputControl[i] === undefined)
             {
@@ -40,7 +62,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             if(!inputControl[i].value)
             {
+                table_top.hidden = true;
+                removeButton.hidden = true;
+
                 return false;
+
             }
         }
 
@@ -66,6 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
         tdTask.innerText = comment.value;
 
         //czyszczenie inputa po zapisaniu zadania
+
         additionDate.value = '';
         authorName.value = '';
         priority.value = '';
@@ -79,6 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
         //usuwanie zadania z listy
         btnDelete.addEventListener('click', function () {
             this.parentElement.parentElement.removeChild(this.parentElement);
+            hideEmptyTable();
         });
 
         tr.appendChild(tdAdditionDate);
@@ -93,85 +121,16 @@ document.addEventListener('DOMContentLoaded', function () {
         /*Po dodaniu zadania, formularz się chowa.*/
         form.hidden = !form.hidden;
 
-        //usuwanie ukończonych zadań
+        //usuwanie wszystkich ukończonych zadań
         removeButton.addEventListener('click', function () {
             if (tr.className.indexOf('complete') > -1) {
                 tr.parentElement.removeChild(tr);
-                console.log('Ok');
+                hideEmptyTable();
             }
-            /* Nie działa
-            if (tableBody.children.length === 0) {
-                table_top.style.display = 'none';
-
-            } else {
-                table_top.style.display = 'contents';
-            }
-        */
         });
-
-        //LOCAL STORAGE
-         //tablica, do której zapisywane będą poszczególne taski (obiekty)
-            var toDoList = [];
-
-            //zapisuję tablicę do localStorage
-            localStorage.setItem('toDoList', '');
-
-            //obiekt tworzony przy każdej iteracji
-            var task = [
-                {
-                    id: 'counter',
-                    additionDate :'tdAdditionDate',
-                    authorName: 'tdAuthor',
-                    priority : 'tdPriority',
-                    comment : 'tdTask'
-                }
-            ];
-
-            if(addTaskBtn === null){
-                toDoList.push(task[i]);
-            }
-
-            // Retrieve the object from storage
-            var retrievedObject = localStorage.getItem('toDoList', JSON.stringify(toDoList));
-            // parsing
-            var parsedObject = JSON.parse( localStorage.getItem('toDoList') );
-
-        window.localStorage
-
-        /*
-        btnDelete.innerText = 'Usunąć';
-        btnComplete.innerText = 'Wykonane';
-        */
-
-        //tworzę prototyp obiektu
-        // Task = {
-        //     id:"",
-        //     additionDate : "",
-        //     authorName : "",
-        //     priority : "",
-        //     comment : ""
-        // };
-        //
-        // //iteruję po poszczególnych taskach z tod_list
-        // for(var i = 0; i < todo_list.length; i++){
-        //
-        //     //zapisuję poszczególny task w obiekcie
-        //     var todo_list = Object.create(Task);
-        //     todo_list.id = 'i';
-        //     todo_list.additionDate = 'tdAdditionDate';
-        //     todo_listtasks.authorName = 'tdAuthor';
-        //     todo_list.priority = 'tdPriority';
-        //     todo_list.comment = 'tdTask';
-        //
-        // }
-        //
-        // window.localStorage
-        // //Zapis
-        // localStorage.setItem('todo_list', JSON.stringify( tasks ) );
-        // //Odczyt:
-        // var tasks = JSON.parse( localStorage.getItem('todo_list') );
-
     });
+
+
 
 
 });

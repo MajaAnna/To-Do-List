@@ -94,6 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
         liAuthor.innerText = "Nazwa zadania: " + authorName.value;
         liPriority.innerText = "Priorytet: " + priority.value;
         liTask.innerText = "Opis: " + comment.value;
+        liForButtons.setAttribute('data-id', 'counter');
         labelForBtnCom.innerText = "Wykonane";
         labelForBtnDel.innerText = "Usuń";
 
