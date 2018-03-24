@@ -126,37 +126,53 @@ document.addEventListener('DOMContentLoaded', function () {
         form.hidden = !form.hidden;
 
         //LOCAL STORAGE
-        var task = [
-            {
-                id: 'counter',
-                additionDate : 'liAdditionDate',
-                authorName : 'liAuthor',
-                priority : 'liPriority',
-                comment : 'liTask'
-            }
-        ];
+        var localStorageTasks = JSON.parse( localStorage.getItem( 'tasks' ) );
+        var newTask = {
+            id: 'counter',
+            additionDate : 'liAdditionDate',
+            authorName : 'liAuthor',
+            priority : 'liPriority',
+            comment : 'liTask'
+        };
 
-        //for (var prop in task) {
+        // Jeżeli w pamięci nie ma zadań to stwórz tablice z jednym zadaniem
+        if( localStorageTasks === null ){
+            localStorageTasks = [newTask];
 
-            if (addTaskBtn !== null) {
-                task.push(mainContainer);
-            }
+        // Jeżeli zadania już istnieją to dopchnij do tej tablicy kolejne
+        } else {
+            localStorageTasks.push(newTask);
+        }
+
+        // Wrzucenie wszystkiego do pamięci
+        localStorage.setItem( 'tasks', JSON.stringify(localStorageTasks) );
+        console.log(localStorageTasks);
+
+
+        // var task = [
+        //     {
+        //         id: 'counter',
+        //         additionDate : 'liAdditionDate',
+        //         authorName : 'liAuthor',
+        //         priority : 'liPriority',
+        //         comment : 'liTask'
+        //     }
+        // ];
+
             /**
              * set - get - parse
              * **/
             // Put the object into storage
-            localStorage.setItem('task', JSON.stringify(objects));
-
-            objects = JSON.parse(localStorage.getItem("task"));
-            console.log(objects);
+            //localStorage.setItem('task', JSON.stringify(taskStringified));
 
             // Retrieve the object from storage
             //var retrievedObject = localStorage.getItem('task');
 
-            // parsing
-            //var parsedObject = JSON.parse(localStorage.getItem('task'));
-            //console.log(parsedObject);
+            //console.log('retrievedObject: ', JSON.parse(retrievedObject));
 
+            // parsing
+            //var taskStringified = JSON.parse(localStorage.getItem('task'));
+            //console.log(taskStringified);
         //}
 
         /**
