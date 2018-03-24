@@ -1,0 +1,166 @@
+document.addEventListener('DOMContentLoaded', function () {
+    var hideShowFormBtn = document.getElementById('main_btn'),
+        form = document.getElementById('form'),
+        addTaskBtn = document.getElementById('btn_submit'),
+        additionDate = document.querySelector('#date'),
+        authorName = document.querySelector('#name'),
+        priority = document.querySelector('#priority'),
+        comment = document.querySelector('#comment'),
+        removeButton = document.querySelector('#removeFinishedTasksButton'),
+        inputControl = document.getElementsByClassName('validation_required'),
+        ul = document.querySelector('ul');
+
+    /**hideShowFormBtn
+     * Przycisk pokazuje formularz do dodawania zadania**/
+    form.hidden = true;
+    hideShowFormBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        form.hidden = !form.hidden;
+    });
+
+    /**btnDelete**/
+    function checkboxDel(element, divToDelete){
+        var btnDelete = document.createElement('input'),
+            label = document.createElement('label');
+        btnDelete.setAttribute('type', 'checkbox');
+        label.classList.add('delete');
+        element.appendChild(label);
+        label.appendChild(btnDelete);
+
+        //usuwanie zadania z listy
+        btnDelete.addEventListener('change', function () {
+            divToDelete.parentElement.removeChild(divToDelete);
+
+            window.localStorage.removeItem('divToDelete');
+        });
+    }
+
+    /**usuwanie ukończonych zadań**/
+    function removeCompleteTasks(btnCom){
+        var labelCom = btnCom.parentElement;
+        var divToDelete = labelCom.parentElement.parentElement.parentElement;
+
+        removeButton.addEventListener('click', function () {
+            if(labelCom.className.indexOf('complete') > -1){
+                divToDelete.parentElement.removeChild(divToDelete);
+                window.localStorage.removeItem('divToDelete');
+            }
+        });
+    }
+
+    /**btnComplete**/
+    function checkboxCom(element){
+        var btnComplete = document.createElement('input'),
+            label = document.createElement('label');
+        btnComplete.setAttribute('type', 'checkbox');
+        label.classList.add('done');
+        element.appendChild(label);
+        label.appendChild(btnComplete);
+
+        //zadanie wykonane
+        btnComplete.addEventListener('change', function () {
+            this.parentElement.classList.toggle('complete');
+        });
+
+        removeCompleteTasks(btnComplete);
+    }
+
+
+    /**ToDoList**/
+    function savingListItem(){
+        /* walidacja danych */
+        for (var i=0; i<inputControl.length; i++) {
+            if(inputControl[i] === undefined)
+            {
+                continue;
+            }
+            if(!inputControl[i].value)
+            {
+                return false;
+            }
+        }
+
+        var mainContainer = document.createElement('div'),
+            liAdditionDate = document.createElement('li'),
+            liAuthor = document.createElement('li'),
+            liPriority = document.createElement('li'),
+            liTask = document.createElement('li'),
+            liForButtons = document.createElement('li'),
+            labelForBtnCom = document.createElement('label'),
+            labelForBtnDel = document.createElement('label');
+
+
+        liAdditionDate.innerText = "Czas wykonania zadania: " + additionDate.value;
+        liAuthor.innerText = "Nazwa zadania: " + authorName.value;
+        liPriority.innerText = "Priorytet: " + priority.value;
+        liTask.innerText = "Opis: " + comment.value;
+        labelForBtnCom.innerText = "Wykonane";
+        labelForBtnDel.innerText = "Usuń";
+
+        //czyszczenie inputa po zapisaniu zadania
+        additionDate.value = '';
+        authorName.value = '';
+        priority.value = '';
+        comment.value = '';
+
+        ul.appendChild(mainContainer);
+        mainContainer.appendChild(liAdditionDate);
+        mainContainer.appendChild(liAuthor);
+        mainContainer.appendChild(liPriority);
+        mainContainer.appendChild(liTask);
+        mainContainer.appendChild(liForButtons);
+        liForButtons.appendChild(labelForBtnCom);
+        liForButtons.appendChild(labelForBtnDel);
+
+        checkboxDel(labelForBtnDel, mainContainer);
+        checkboxCom(labelForBtnCom);
+    }
+
+    var counter = 0;
+
+    /**Dodaj zadanie do listy z formularza**/
+    addTaskBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        form.hidden = false;
+
+        savingListItem();
+        counter++;
+
+        /*Po dodaniu zadania, formularz się chowa.*/
+        form.hidden = !form.hidden;
+
+        var toDoList=[];
+        var task = [
+            {
+                id: 'counter',
+                additionDate :'liAdditionDate',
+                authorName: 'liAuthor',
+                priority : 'liPriority',
+                comment : 'liTask'
+            }
+        ];
+
+        window.localStorage.setItem('toDoList', 'task');
+        if(addTaskBtn !== null){
+            toDoList.push(task);
+        }
+
+        // Retrieve the object from storage
+        var retrievedObject = localStorage.getItem('toDoList', JSON.stringify(toDoList));
+
+        // parsing
+        var parsedObject = JSON.parse( localStorage.getItem('toDoList') );
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+});

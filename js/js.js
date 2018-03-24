@@ -12,14 +12,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
         inputControl = document.getElementsByClassName('validation_required');
 
-    form.style.display = 'none';
-    table_top.style.display = 'none';
+    form.hidden = true;
+    //table_top.style.display = 'none';
 
     /*Przycisk pokazuje formularz do dodawania zadania*/
 
     hideShowFormBtn.addEventListener('click', function (e) {
         e.preventDefault();
-        form.style.display = 'block';
+        //form.style.display = 'block';
         form.hidden = !form.hidden;
     });
 
