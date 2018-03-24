@@ -30,8 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
         //usuwanie zadania z listy
         btnDelete.addEventListener('change', function () {
             divToDelete.parentElement.removeChild(divToDelete);
-
-            window.localStorage.removeItem('divToDelete');
+            localStorage.removeItem('divToDelete');
         });
     }
 
@@ -43,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
         removeButton.addEventListener('click', function () {
             if(labelCom.className.indexOf('complete') > -1){
                 divToDelete.parentElement.removeChild(divToDelete);
-                window.localStorage.removeItem('divToDelete');
+                localStorage.removeItem('divToDelete');
             }
         });
     }
@@ -65,9 +64,15 @@ document.addEventListener('DOMContentLoaded', function () {
         removeCompleteTasks(btnComplete);
     }
 
+    var counter = 0;
 
-    /**ToDoList**/
-    function savingListItem(){
+    /**Dodaj zadanie do listy z formularza**/
+    addTaskBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        form.hidden = false;
+
+        //savingListItem();
+
         /* walidacja danych */
         for (var i=0; i<inputControl.length; i++) {
             if(inputControl[i] === undefined)
@@ -89,6 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
             labelForBtnCom = document.createElement('label'),
             labelForBtnDel = document.createElement('label');
 
+        counter++;
 
         liAdditionDate.innerText = "Czas wykonania zadania: " + additionDate.value;
         liAuthor.innerText = "Nazwa zadania: " + authorName.value;
@@ -115,53 +121,103 @@ document.addEventListener('DOMContentLoaded', function () {
 
         checkboxDel(labelForBtnDel, mainContainer);
         checkboxCom(labelForBtnCom);
-    }
-
-    var counter = 0;
-
-    /**Dodaj zadanie do listy z formularza**/
-    addTaskBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        form.hidden = false;
-
-        savingListItem();
-        counter++;
 
         /*Po dodaniu zadania, formularz się chowa.*/
         form.hidden = !form.hidden;
 
-        var toDoList=[];
+        //LOCAL STORAGE
         var task = [
             {
                 id: 'counter',
-                additionDate :'liAdditionDate',
-                authorName: 'liAuthor',
+                additionDate : 'liAdditionDate',
+                authorName : 'liAuthor',
                 priority : 'liPriority',
                 comment : 'liTask'
             }
         ];
 
-        window.localStorage.setItem('toDoList', 'task');
-        if(addTaskBtn !== null){
-            toDoList.push(task);
-        }
+        //for (var prop in task) {
 
-        // Retrieve the object from storage
-        var retrievedObject = localStorage.getItem('toDoList', JSON.stringify(toDoList));
+            if (addTaskBtn !== null) {
+                task.push(mainContainer);
+            }
+            /**
+             * set - get - parse
+             * **/
+            // Put the object into storage
+            localStorage.setItem('task', JSON.stringify(objects));
 
-        // parsing
-        var parsedObject = JSON.parse( localStorage.getItem('toDoList') );
+            objects = JSON.parse(localStorage.getItem("task"));
+            console.log(objects);
+
+            // Retrieve the object from storage
+            //var retrievedObject = localStorage.getItem('task');
+
+            // parsing
+            //var parsedObject = JSON.parse(localStorage.getItem('task'));
+            //console.log(parsedObject);
+
+        //}
+
+        /**
+         * Zapis
+         localStorage.setItem('todo_list', JSON.strigify( tasks ) );
+         Odczyt:
+         var tasks = JSON.parse( localStorage.getItem('todo_list') );
+         * **/
 
     });
 
-
-
-
-
-
-
-
-
-
+    /**ToDoList**/
+    // function savingListItem(){
+    //     /* walidacja danych */
+    //     for (var i=0; i<inputControl.length; i++) {
+    //         if(inputControl[i] === undefined)
+    //         {
+    //             continue;
+    //         }
+    //         if(!inputControl[i].value)
+    //         {
+    //             return false;
+    //         }
+    //     }
+    //
+    //     var mainContainer = document.createElement('div'),
+    //         liAdditionDate = document.createElement('li'),
+    //         liAuthor = document.createElement('li'),
+    //         liPriority = document.createElement('li'),
+    //         liTask = document.createElement('li'),
+    //         liForButtons = document.createElement('li'),
+    //         labelForBtnCom = document.createElement('label'),
+    //         labelForBtnDel = document.createElement('label');
+    //
+    //     counter++;
+    //
+    //     liAdditionDate.innerText = "Czas wykonania zadania: " + additionDate.value;
+    //     liAuthor.innerText = "Nazwa zadania: " + authorName.value;
+    //     liPriority.innerText = "Priorytet: " + priority.value;
+    //     liTask.innerText = "Opis: " + comment.value;
+    //     liForButtons.setAttribute('data-id', 'counter');
+    //     labelForBtnCom.innerText = "Wykonane";
+    //     labelForBtnDel.innerText = "Usuń";
+    //
+    //     //czyszczenie inputa po zapisaniu zadania
+    //     additionDate.value = '';
+    //     authorName.value = '';
+    //     priority.value = '';
+    //     comment.value = '';
+    //
+    //     ul.appendChild(mainContainer);
+    //     mainContainer.appendChild(liAdditionDate);
+    //     mainContainer.appendChild(liAuthor);
+    //     mainContainer.appendChild(liPriority);
+    //     mainContainer.appendChild(liTask);
+    //     mainContainer.appendChild(liForButtons);
+    //     liForButtons.appendChild(labelForBtnCom);
+    //     liForButtons.appendChild(labelForBtnDel);
+    //
+    //     checkboxDel(labelForBtnDel, mainContainer);
+    //     checkboxCom(labelForBtnCom);
+    // }
 
 });
