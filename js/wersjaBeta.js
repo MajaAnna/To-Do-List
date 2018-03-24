@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem( 'tasks', JSON.stringify(localStorageTasks) );
         console.log(localStorageTasks);
 
-        divLocalStorage.innerHTML = localStorageTasks + "<br>";
+        //divLocalStorage.innerHTML = localStorageTasks + "<br>";
 
     });
 

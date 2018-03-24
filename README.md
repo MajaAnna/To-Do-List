@@ -2,6 +2,10 @@
 
 ## CEL
 
+Wykonaliśmy dwie wersje projektu:
+index.html - która jest ładna, ale nie wszystko działa
+i wersjaBeta.html - która jest brzydka, ale działają przyciski.
+
 Celem pracy naszej grupy było stworzenie responsywnej aplikacji, służacej do zapisywania zadań. 
 
 
