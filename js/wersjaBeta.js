@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', function () {
         comment = document.querySelector('#comment'),
         removeButton = document.querySelector('#removeFinishedTasksButton'),
         inputControl = document.getElementsByClassName('validation_required'),
-        ul = document.querySelector('ul');
+        ul = document.querySelector('ul'),
+        divLocalStorage = document.querySelector('.localStorage');
 
     /**hideShowFormBtn
      * Przycisk pokazuje formularz do dodawania zadania**/
@@ -30,7 +31,8 @@ document.addEventListener('DOMContentLoaded', function () {
         //usuwanie zadania z listy
         btnDelete.addEventListener('change', function () {
             divToDelete.parentElement.removeChild(divToDelete);
-            localStorage.removeItem('divToDelete');
+            //localStorage.removeItem(divLocalStorage.innerHTML);
+            //localStorage.clear();
         });
     }
 
@@ -42,7 +44,8 @@ document.addEventListener('DOMContentLoaded', function () {
         removeButton.addEventListener('click', function () {
             if(labelCom.className.indexOf('complete') > -1){
                 divToDelete.parentElement.removeChild(divToDelete);
-                localStorage.removeItem('divToDelete');
+                //localStorage.removeItem(divLocalStorage.innerHTML);
+                //localStorage.clear();
             }
         });
     }
@@ -148,92 +151,8 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem( 'tasks', JSON.stringify(localStorageTasks) );
         console.log(localStorageTasks);
 
-
-        // var task = [
-        //     {
-        //         id: 'counter',
-        //         additionDate : 'liAdditionDate',
-        //         authorName : 'liAuthor',
-        //         priority : 'liPriority',
-        //         comment : 'liTask'
-        //     }
-        // ];
-
-            /**
-             * set - get - parse
-             * **/
-            // Put the object into storage
-            //localStorage.setItem('task', JSON.stringify(taskStringified));
-
-            // Retrieve the object from storage
-            //var retrievedObject = localStorage.getItem('task');
-
-            //console.log('retrievedObject: ', JSON.parse(retrievedObject));
-
-            // parsing
-            //var taskStringified = JSON.parse(localStorage.getItem('task'));
-            //console.log(taskStringified);
-        //}
-
-        /**
-         * Zapis
-         localStorage.setItem('todo_list', JSON.strigify( tasks ) );
-         Odczyt:
-         var tasks = JSON.parse( localStorage.getItem('todo_list') );
-         * **/
+        divLocalStorage.innerHTML = localStorageTasks + "<br>";
 
     });
-
-    /**ToDoList**/
-    // function savingListItem(){
-    //     /* walidacja danych */
-    //     for (var i=0; i<inputControl.length; i++) {
-    //         if(inputControl[i] === undefined)
-    //         {
-    //             continue;
-    //         }
-    //         if(!inputControl[i].value)
-    //         {
-    //             return false;
-    //         }
-    //     }
-    //
-    //     var mainContainer = document.createElement('div'),
-    //         liAdditionDate = document.createElement('li'),
-    //         liAuthor = document.createElement('li'),
-    //         liPriority = document.createElement('li'),
-    //         liTask = document.createElement('li'),
-    //         liForButtons = document.createElement('li'),
-    //         labelForBtnCom = document.createElement('label'),
-    //         labelForBtnDel = document.createElement('label');
-    //
-    //     counter++;
-    //
-    //     liAdditionDate.innerText = "Czas wykonania zadania: " + additionDate.value;
-    //     liAuthor.innerText = "Nazwa zadania: " + authorName.value;
-    //     liPriority.innerText = "Priorytet: " + priority.value;
-    //     liTask.innerText = "Opis: " + comment.value;
-    //     liForButtons.setAttribute('data-id', 'counter');
-    //     labelForBtnCom.innerText = "Wykonane";
-    //     labelForBtnDel.innerText = "Usuń";
-    //
-    //     //czyszczenie inputa po zapisaniu zadania
-    //     additionDate.value = '';
-    //     authorName.value = '';
-    //     priority.value = '';
-    //     comment.value = '';
-    //
-    //     ul.appendChild(mainContainer);
-    //     mainContainer.appendChild(liAdditionDate);
-    //     mainContainer.appendChild(liAuthor);
-    //     mainContainer.appendChild(liPriority);
-    //     mainContainer.appendChild(liTask);
-    //     mainContainer.appendChild(liForButtons);
-    //     liForButtons.appendChild(labelForBtnCom);
-    //     liForButtons.appendChild(labelForBtnDel);
-    //
-    //     checkboxDel(labelForBtnDel, mainContainer);
-    //     checkboxCom(labelForBtnCom);
-    // }
 
 });
