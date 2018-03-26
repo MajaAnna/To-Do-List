@@ -131,11 +131,11 @@ document.addEventListener('DOMContentLoaded', function () {
         //LOCAL STORAGE
         var localStorageTasks = JSON.parse( localStorage.getItem( 'tasks' ) );
         var newTask = {
-            id: 'counter',
-            additionDate : 'liAdditionDate',
-            authorName : 'liAuthor',
-            priority : 'liPriority',
-            comment : 'liTask'
+            id: counter,
+            additionDate : liAdditionDate.innerText,
+            authorName : liAuthor.innerText,
+            priority : liPriority.innerText,
+            comment : liTask.innerText
         };
 
         // Jeżeli w pamięci nie ma zadań to stwórz tablice z jednym zadaniem
