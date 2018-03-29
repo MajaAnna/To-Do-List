@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
         form = document.getElementById('form'),
         addTaskBtn = document.getElementById('btn_submit'),
         additionDate = document.querySelector('#date'),
-        authorName = document.querySelector('#name'),
+        taskName = document.querySelector('#name'),
         priority = document.querySelector('#priority'),
         comment = document.querySelector('#comment'),
         removeButton = document.querySelector('#removeFinishedTasksButton'),
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         var mainContainer = document.createElement('div'),
             liAdditionDate = document.createElement('li'),
-            liAuthor = document.createElement('li'),
+            liTaskName = document.createElement('li'),
             liPriority = document.createElement('li'),
             liTask = document.createElement('li'),
             liForButtons = document.createElement('li'),
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
         counter++;
 
         liAdditionDate.innerText = "Czas wykonania zadania: " + additionDate.value;
-        liAuthor.innerText = "Nazwa zadania: " + authorName.value;
+        liTaskName.innerText = "Nazwa zadania: " + taskName.value;
         liPriority.innerText = "Priorytet: " + priority.value;
         liTask.innerText = "Opis: " + comment.value;
         liForButtons.setAttribute('data-id', 'counter');
@@ -109,13 +109,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
         //czyszczenie inputa po zapisaniu zadania
         additionDate.value = '';
-        authorName.value = '';
+        taskName.value = '';
         priority.value = '';
         comment.value = '';
 
         ul.appendChild(mainContainer);
         mainContainer.appendChild(liAdditionDate);
-        mainContainer.appendChild(liAuthor);
+        mainContainer.appendChild(liTaskName);
         mainContainer.appendChild(liPriority);
         mainContainer.appendChild(liTask);
         mainContainer.appendChild(liForButtons);
@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var newTask = {
             id: counter,
             additionDate : liAdditionDate.innerText,
-            authorName : liAuthor.innerText,
+            taskName : liTaskName.innerText,
             priority : liPriority.innerText,
             comment : liTask.innerText
         };
