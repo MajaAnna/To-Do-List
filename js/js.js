@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function changeCompleteTaskColor(element, target) {
         element.addEventListener('click', function () {
+            console.log('diala')
             target.classList.toggle('complete');
         });
     }
@@ -51,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    /*Przycisk pokazuje formularz do dodawania zadania*/
+    /*Show and Hide form for tasks*/
 
     hideShowFormBtn.addEventListener('click', function (e) {
         e.preventDefault();
@@ -59,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     });
 
-    /*Przycisk dodaje nowe zadanie do tablicy*/
+    /*Button adds a new task to the table*/
 
     addTaskBtn.addEventListener('click', function (e) {
         e.preventDefault();
@@ -68,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
         table_top.hidden = false;
         removeButton.hidden = false;
 
-        /* walidacja danych */
+        /*Validation*/
 
         for (var i = 0; i < inputControl.length; i++) {
             if (inputControl[i] === undefined) {
@@ -82,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             }
         }
-        /* tworzenie nowych elementow tablicy */
+        /*Creating new elements of the table*/
 
         var tr = document.createElement('tr'),
             tdAdditionDate = document.createElement('td'),
@@ -107,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
         tdPriority.innerText = priority.value;
         tdTask.innerText = comment.value;
 
-        //czyszczenie inputa po zapisaniu zadania
+        /* clear inputs after task added */
 
         additionDate.value = '';
         authorName.value = '';
@@ -127,10 +128,10 @@ document.addEventListener('DOMContentLoaded', function () {
         tr.appendChild(btnDelete);
 
 
-        table.appendChild(tr);
+        table_body.appendChild(tr);
 
 
-        /*Po dodaniu zadania, formularz się chowa.*/
+        /*Form hides after task been added*/
         form.hidden = !form.hidden;
 
         removeAllCompleteTasks(removeButton, tr);
@@ -145,37 +146,54 @@ document.addEventListener('DOMContentLoaded', function () {
             comment: tdTask.innerText
         };
 
-        // Jeżeli w pamięci nie ma zadań to stwórz tablice z jednym zadaniem
+        /*If there's nothing in the memory, create array with one task*/
         if (localStorageTasks === null) {
             localStorageTasks = [newTask];
 
-            // Jeżeli zadania już istnieją to dopchnij do tej tablicy kolejne
+            /* If there's smth in the table, add task to the array*/
         } else {
             localStorageTasks.push(newTask);
         }
 
-        // Wrzucenie wszystkiego do pamięci
+        /* Adding to the Local Storage */
         localStorage.setItem('tasks', JSON.stringify(localStorageTasks));
         console.log(localStorageTasks);
 
     });
 
-    /* Clear ALL tasks from LocalStorage */
-    //localStorage.clear();
-
-    /* Getting tasks from LocalStorage */
+    /* Getting and Delete tasks from LocalStorage */
     var retrievedData = localStorage.getItem("tasks");
     var localStorageTasks = JSON.parse(retrievedData);
 
-    for(var i=0; i<localStorageTasks.length; i++) {
+    console.log(localStorageTasks);
 
-       var newRow = table.insertRow();
+    for (var i = 0; i < localStorageTasks.length; i++) {
+        var btnDelete = document.createElement('button');
+        var btnComplete = document.createElement('button');
+
+        btnDelete.innerText = 'Usunąć';
+        btnComplete.innerText = 'Wykonane';
+        btnDelete.setAttribute("style", "background-color: rgba(255, 3, 21, 0.65);");
+        btnComplete.setAttribute("style", "background-color: rgba(0, 128, 0, 0.65);");
+
+
+        var newRow = table_body.insertRow();
 
         for (var info in localStorageTasks[i]) {
-
-           var newCell = newRow.insertCell();
+            var newCell = newRow.insertCell();
             newCell.innerText = localStorageTasks[i][info]
         }
+
+        newRow.append(btnComplete);
+        newRow.append(btnDelete);
+
+        changeCompleteTaskColor(btnComplete, newRow);
+        deleteTask(btnDelete);
+        removeAllCompleteTasks(removeButton, newRow);
     }
-});
+
+})
+
+/* Clear ALL tasks from LocalStorage */
+//localStorage.clear();
 
