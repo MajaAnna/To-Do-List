@@ -1,21 +1,21 @@
 {
   "name": "To-Do-List",
   "version": "1.0.0",
-  "description": "<img alt=\"Logo\" src=\"http://coderslab.pl/svg/logo-coderslab.svg\" width=\"400\">",
+  "description": "",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CodersLab-core/FE_Egzamin_3.git"
+    "url": ""
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/CodersLab-core/FE_Egzamin_3/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/CodersLab-core/FE_Egzamin_3#readme",
+  "homepage": "",
   "dependencies": {
     "bootstrap": "^4.0.0",
     "gulp": "^3.9.1",
