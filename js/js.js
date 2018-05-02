@@ -18,8 +18,9 @@ document.addEventListener('DOMContentLoaded', function () {
     removeButton.hidden = true;
     form.hidden = true;
 
+    // there occurs error with this function
     // function hideEmptyTable() {
-    //     if (table_body.nextElementSibling.childElementCount === 6) {
+    //     if (table_body.nextElementSibling.childElementCount === null) {
     //         table_top.hidden = false;
     //         removeButton.hidden = false;
     //     } else {
@@ -31,7 +32,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function changeCompleteTaskColor(element, target) {
         element.addEventListener('click', function () {
-            console.log('dziala')
             target.classList.toggle('complete');
         });
     }
@@ -47,9 +47,9 @@ document.addEventListener('DOMContentLoaded', function () {
     addTaskBtn.addEventListener('click', function (e) {
         e.preventDefault();
 
-        table.hidden = false;
-        table_top.hidden = false;
-        removeButton.hidden = false;
+        // table.hidden = false;
+        // table_top.hidden = false;
+        // removeButton.hidden = false;
 
         /*Validation*/
         for (var i = 0; i < inputControl.length; i++) {
@@ -61,9 +61,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 removeButton.hidden = true;
 
                 return false;
-
             }
         }
+
         /*Creating new elements of the table*/
         var tr = document.createElement('tr'),
             tdAdditionDate = document.createElement('td'),
@@ -73,7 +73,6 @@ document.addEventListener('DOMContentLoaded', function () {
             tdForButtons = document.createElement('td'),
             btnDelete = document.createElement('button'),
             btnComplete = document.createElement('button');
-
 
         btnDelete.innerText = 'Usunąć';
         btnComplete.innerText = 'Wykonane';
@@ -94,10 +93,9 @@ document.addEventListener('DOMContentLoaded', function () {
         priority.value = '';
         comment.value = '';
 
-
-        changeCompleteTaskColor(btnComplete, tr);
-
-        deleteTask(btnDelete);
+        // changeCompleteTaskColor(btnComplete, tr);
+        //
+        // deleteTask(btnDelete);
 
         tr.appendChild(tdAdditionDate);
         tr.appendChild(tdAuthor);
@@ -178,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var retrievedData = localStorage.getItem("tasks");
     var localStorageTasks = JSON.parse(retrievedData);
 
-    if(localStorageTasks === null){
+    if(localStorageTasks.length === 0){
         console.log('local storage is empty yet')
     } else {
         console.log(localStorageTasks);
