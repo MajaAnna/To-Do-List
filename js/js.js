@@ -35,6 +35,39 @@ document.addEventListener('DOMContentLoaded', function () {
             target.classList.toggle('complete');
         });
     }
+    function deleteTask(element, index, array) {
+        element.addEventListener('click', function () {
+            var removeItem = this.parentElement;
+            removeItem.parentElement.removeChild(this.parentElement);
+            var newArr = array.filter(function(el, i){
+                return index !== i;
+            })
+            localStorage.setItem('tasks', JSON.stringify( newArr ) );
+        });
+    }
+
+    function removeAllCompleteTasks(element, target, index, array) {
+        element.addEventListener('click', function () {
+
+            //it shows all newRows, because they are not distinguished
+            //console.log(target);
+
+            if (target.className.indexOf('complete') > -1) {
+
+                //it shows target(newRow) with class 'complete'
+                //console.log(target);
+
+                target.parentElement.removeChild(target);
+
+                var newArr = array.filter(function(el, i){
+                    return index !== i;
+                })
+                localStorage.setItem('tasks', JSON.stringify( newArr ) );
+                // hideEmptyTable();
+            }
+
+        });
+    }
 
     /*Show and Hide form for tasks*/
     hideShowFormBtn.addEventListener('click', function (e) {
@@ -124,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (localStorageTasks === null) {
             localStorageTasks = [newTask];
 
-        /* If there's sth in the table, add task to the array*/
+            /* If there's sth in the table, add task to the array*/
         } else {
             localStorageTasks.push(newTask);
         }
@@ -147,40 +180,6 @@ document.addEventListener('DOMContentLoaded', function () {
         displayLocalStorage();
 
     });
-
-    function deleteTask(element, index, array) {
-        element.addEventListener('click', function () {
-            var removeItem = this.parentElement;
-            removeItem.parentElement.removeChild(this.parentElement);
-            var newArr = array.filter(function(el, i){
-                return index !== i;
-            })
-            localStorage.setItem('tasks', JSON.stringify( newArr ) );
-        });
-    }
-
-    function removeAllCompleteTasks(element, target, index, array) {
-        element.addEventListener('click', function () {
-
-            //it shows all newRows, because they are not distinguished
-            //console.log(target);
-
-            if (target.className.indexOf('complete') > -1) {
-
-                //it shows target(newRow) with class 'complete'
-                //console.log(target);
-
-                target.parentElement.removeChild(target);
-
-                var newArr = array.filter(function(el, i){
-                    return index !== i;
-                })
-                localStorage.setItem('tasks', JSON.stringify( newArr ) );
-                // hideEmptyTable();
-            }
-
-        });
-    }
 
     /* Getting and Delete tasks from LocalStorage */
     var retrievedData = localStorage.getItem("tasks");
@@ -211,19 +210,28 @@ document.addEventListener('DOMContentLoaded', function () {
         changeCompleteTaskColor(btnComplete, newRow);
         deleteTask(btnDelete, i, localStorageTasks);
         removeAllCompleteTasks(removeButton, newRow, i, localStorageTasks);
-
-        if(localStorageTasks === null){
-            table.hidden = true;
-            table_top.hidden = true;
-            removeButton.hidden = true
-        } else {
-            table.hidden = false;
-            table_top.hidden = false;
-            removeButton.hidden = false;
-        }
     }
 
 })
+
+
+/*
+function displayLocalStorage() {
+            if (localStorageTasks === null) {
+                table.hidden = true;
+                table_top.hidden = true;
+                removeButton.hidden = true
+            } else {
+                table.hidden = false;
+                table_top.hidden = false;
+                removeButton.hidden = false;
+            }
+        }
+        displayLocalStorage();
+
+changeCompleteTaskColor(btnComplete, newRow);
+        deleteTask(btnDelete, i, localStorageTasks);
+        removeAllCompleteTasks(removeButton, newRow, i, localStorageTasks);*/
 
 
 
