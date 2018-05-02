@@ -14,40 +14,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
         inputControl = document.getElementsByClassName('validation_required');
 
-    //table.hidden = true;
-    //removeButton.hidden = true;
+    table.hidden = true;
+    removeButton.hidden = true;
     form.hidden = true;
 
-    function hideEmptyTable() {
-        if (table_body.nextElementSibling.childElementCount === 6) {
-            table_top.hidden = false;
-            removeButton.hidden = false;
-        } else {
-            table_top.hidden = true;
-            removeButton.hidden = true;
-        }
-    }
+    // function hideEmptyTable() {
+    //     if (table_body.nextElementSibling.childElementCount === 6) {
+    //         table_top.hidden = false;
+    //         removeButton.hidden = false;
+    //     } else {
+    //         table_top.hidden = true;
+    //         removeButton.hidden = true;
+    //     }
+    // }
+
 
     function changeCompleteTaskColor(element, target) {
         element.addEventListener('click', function () {
             console.log('dziala')
             target.classList.toggle('complete');
-        });
-    }
-
-    function deleteTask(element) {
-        element.addEventListener('click', function () {
-            this.parentElement.parentElement.removeChild(this.parentElement);
-        });
-    }
-
-    function removeAllCompleteTasks(element, target, array) {
-        element.addEventListener('click', function () {
-            if (target.className.indexOf('complete') > -1) {
-                target.parentElement.removeChild(target);
-                hideEmptyTable();
-            }
-
         });
     }
 
@@ -126,8 +111,6 @@ document.addEventListener('DOMContentLoaded', function () {
         /*Form hides after task was added*/
         form.hidden = !form.hidden;
 
-
-
         /* LOCAL STORAGE -------------------------------------------------------------------------------*/
         var localStorageTasks = JSON.parse(localStorage.getItem('tasks'));
         var newTask = {
@@ -141,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (localStorageTasks === null) {
             localStorageTasks = [newTask];
 
-        /* If there's sth in the table, add task to the array*/
+            /* If there's sth in the table, add task to the array*/
         } else {
             localStorageTasks.push(newTask);
         }
@@ -150,51 +133,89 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem('tasks', JSON.stringify(localStorageTasks));
         console.log(localStorageTasks);
 
-        /* Clear ALL tasks from LocalStorage */
-        removeButton.addEventListener('click', function(){
-            localStorage.clear();
-        })
-        removeAllCompleteTasks(removeButton, tr);
-
-        if(localStorageTasks === null){
-            table.hidden = true;
-            removeButton.hidden = true
-        } else {
-            table.hidden = false;
-            removeButton.hidden = false;
+        function displayLocalStorage() {
+            if (localStorageTasks === null) {
+                table.hidden = true;
+                table_top.hidden = true;
+                removeButton.hidden = true
+            } else {
+                table.hidden = false;
+                table_top.hidden = false;
+                removeButton.hidden = false;
+            }
         }
+        displayLocalStorage();
 
     });
 
-    /* Getting and Deleting tasks from LocalStorage */
+    function deleteTask(element, index, array) {
+        element.addEventListener('click', function () {
+            var removeItem = this.parentElement;
+            removeItem.parentElement.removeChild(this.parentElement);
+            var newArr = array.filter(function(el, i){
+                return index !== i;
+            })
+            localStorage.setItem('tasks', JSON.stringify( newArr ) );
+        });
+    }
+
+    function removeAllCompleteTasks(element, target, index, array) {
+        element.addEventListener('click', function () {
+            console.log('click');
+            if (target.className.indexOf('complete') > -1) {
+                target.parentElement.removeChild(target);
+                var newArr = array.filter(function(el, i){
+                    return index !== i;
+                })
+                localStorage.setItem('tasks', JSON.stringify( newArr ) );
+                // hideEmptyTable();
+            }
+
+        });
+    }
+
+    /* Getting and Delete tasks from LocalStorage */
     var retrievedData = localStorage.getItem("tasks");
     var localStorageTasks = JSON.parse(retrievedData);
 
-    console.log(localStorageTasks);
+    if(localStorageTasks === null){
+        console.log('local storage is empty yet')
+    } else {
+        console.log(localStorageTasks);
+        for (var i = 0; i < localStorageTasks.length; i++) {
+            var btnDelete = document.createElement('button');
+            var btnComplete = document.createElement('button');
 
-    for (var i = 0; i < localStorageTasks.length; i++) {
-        var btnDelete = document.createElement('button');
-        var btnComplete = document.createElement('button');
-
-        btnDelete.innerText = 'Usunąć';
-        btnComplete.innerText = 'Wykonane';
-        btnDelete.setAttribute("style", "background-color: rgba(255, 3, 21, 0.65);");
-        btnComplete.setAttribute("style", "background-color: rgba(0, 128, 0, 0.65);");
+            btnDelete.innerText = 'Usunąć';
+            btnComplete.innerText = 'Wykonane';
+            btnDelete.setAttribute("style", "background-color: rgba(255, 3, 21, 0.65);");
+            btnComplete.setAttribute("style", "background-color: rgba(0, 128, 0, 0.65);");
 
 
-        var newRow = table_body.insertRow();
+            var newRow = table_body.insertRow();
 
-        for (var info in localStorageTasks[i]) {
-            var newCell = newRow.insertCell();
-            newCell.innerText = localStorageTasks[i][info]
+            for (var info in localStorageTasks[i]) {
+                var newCell = newRow.insertCell();
+                newCell.innerText = localStorageTasks[i][info]
+            }
+
+            newRow.append(btnComplete);
+            newRow.append(btnDelete);
+
+            changeCompleteTaskColor(btnComplete, newRow);
+            deleteTask(btnDelete, i, localStorageTasks);
+            removeAllCompleteTasks(removeButton, newRow, i, localStorageTasks);
+
+            if(localStorageTasks === null){
+                table.hidden = true;
+                table_top.hidden = true;
+                removeButton.hidden = true
+            } else {
+                table.hidden = false;
+                table_top.hidden = false;
+                removeButton.hidden = false;
+            }
         }
-
-        newRow.append(btnComplete);
-        newRow.append(btnDelete);
-
-        changeCompleteTaskColor(btnComplete, newRow);
-        deleteTask(btnDelete);
-        removeAllCompleteTasks(removeButton, newRow);
     }
 
 })
