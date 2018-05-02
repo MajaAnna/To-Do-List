@@ -14,9 +14,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         inputControl = document.getElementsByClassName('validation_required');
 
-
-    table.hidden = true;
-    removeButton.hidden = true;
+    //table.hidden = true;
+    //removeButton.hidden = true;
     form.hidden = true;
 
     function hideEmptyTable() {
@@ -31,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function changeCompleteTaskColor(element, target) {
         element.addEventListener('click', function () {
-            console.log('diala')
+            console.log('dziala')
             target.classList.toggle('complete');
         });
     }
@@ -42,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    function removeAllCompleteTasks(element, target) {
+    function removeAllCompleteTasks(element, target, array) {
         element.addEventListener('click', function () {
             if (target.className.indexOf('complete') > -1) {
                 target.parentElement.removeChild(target);
@@ -53,7 +52,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /*Show and Hide form for tasks*/
-
     hideShowFormBtn.addEventListener('click', function (e) {
         e.preventDefault();
         form.hidden = !form.hidden;
@@ -61,7 +59,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     /*Button adds a new task to the table*/
-
     addTaskBtn.addEventListener('click', function (e) {
         e.preventDefault();
 
@@ -70,7 +67,6 @@ document.addEventListener('DOMContentLoaded', function () {
         removeButton.hidden = false;
 
         /*Validation*/
-
         for (var i = 0; i < inputControl.length; i++) {
             if (inputControl[i] === undefined) {
                 continue;
@@ -84,7 +80,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
         /*Creating new elements of the table*/
-
         var tr = document.createElement('tr'),
             tdAdditionDate = document.createElement('td'),
             tdAuthor = document.createElement('td'),
@@ -109,7 +104,6 @@ document.addEventListener('DOMContentLoaded', function () {
         tdTask.innerText = comment.value;
 
         /* clear inputs after task added */
-
         additionDate.value = '';
         authorName.value = '';
         priority.value = '';
@@ -127,14 +121,11 @@ document.addEventListener('DOMContentLoaded', function () {
         tr.appendChild(btnComplete);
         tr.appendChild(btnDelete);
 
-
         table_body.appendChild(tr);
 
-
-        /*Form hides after task been added*/
+        /*Form hides after task was added*/
         form.hidden = !form.hidden;
 
-        removeAllCompleteTasks(removeButton, tr);
 
 
         /* LOCAL STORAGE -------------------------------------------------------------------------------*/
@@ -150,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (localStorageTasks === null) {
             localStorageTasks = [newTask];
 
-            /* If there's smth in the table, add task to the array*/
+        /* If there's sth in the table, add task to the array*/
         } else {
             localStorageTasks.push(newTask);
         }
@@ -159,9 +150,23 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem('tasks', JSON.stringify(localStorageTasks));
         console.log(localStorageTasks);
 
+        /* Clear ALL tasks from LocalStorage */
+        removeButton.addEventListener('click', function(){
+            localStorage.clear();
+        })
+        removeAllCompleteTasks(removeButton, tr);
+
+        if(localStorageTasks === null){
+            table.hidden = true;
+            removeButton.hidden = true
+        } else {
+            table.hidden = false;
+            removeButton.hidden = false;
+        }
+
     });
 
-    /* Getting and Delete tasks from LocalStorage */
+    /* Getting and Deleting tasks from LocalStorage */
     var retrievedData = localStorage.getItem("tasks");
     var localStorageTasks = JSON.parse(retrievedData);
 
@@ -194,6 +199,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
 })
 
-/* Clear ALL tasks from LocalStorage */
-//localStorage.clear();
+
 
