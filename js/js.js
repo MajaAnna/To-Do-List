@@ -29,7 +29,6 @@ document.addEventListener('DOMContentLoaded', function () {
     //     }
     // }
 
-
     function changeCompleteTaskColor(element, target) {
         element.addEventListener('click', function () {
             target.classList.toggle('complete');
@@ -46,10 +45,6 @@ document.addEventListener('DOMContentLoaded', function () {
     /*Button adds a new task to the table*/
     addTaskBtn.addEventListener('click', function (e) {
         e.preventDefault();
-
-        // table.hidden = false;
-        // table_top.hidden = false;
-        // removeButton.hidden = false;
 
         /*Validation*/
         for (var i = 0; i < inputControl.length; i++) {
@@ -70,16 +65,12 @@ document.addEventListener('DOMContentLoaded', function () {
             tdAuthor = document.createElement('td'),
             tdPriority = document.createElement('td'),
             tdTask = document.createElement('td'),
-            tdForButtons = document.createElement('td'),
             btnDelete = document.createElement('button'),
             btnComplete = document.createElement('button');
 
         btnDelete.innerText = 'Usunąć';
         btnComplete.innerText = 'Wykonane';
 
-        // btnDelete.setAttribute("style", "background-color: rgba(255, 3, 21, 0.65);");
-        // btnComplete.setAttribute("style", "background-color: rgba(0, 128, 0, 0.65);");
-        // removeButton.setAttribute("style", "width: 100%");
         table_top.setAttribute("style", "background-color: #d18040");
 
         btnDelete.classList.add('btnDelete');
@@ -96,8 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
         priority.value = '';
         comment.value = '';
 
-        // changeCompleteTaskColor(btnComplete, tr);
-        //
+        changeCompleteTaskColor(btnComplete, tr);
         // deleteTask(btnDelete);
 
         tr.appendChild(tdAdditionDate);
@@ -134,6 +124,14 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem('tasks', JSON.stringify(localStorageTasks));
         console.log(localStorageTasks);
 
+        for (var j = 0; j < localStorageTasks.length; j++){
+            removeAllCompleteTasks(removeButton, localStorageTasks[j], j, localStorageTasks);
+        }
+
+        for (var n = 0; n < localStorageTasks.length; n++){
+            deleteTask(btnDelete, n, localStorageTasks);
+        }
+
         function displayLocalStorage() {
             if (localStorageTasks === null) {
                 table.hidden = true;
@@ -162,7 +160,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function removeAllCompleteTasks(element, target, index, array) {
         element.addEventListener('click', function () {
-            console.log('click');
             if (target.className.indexOf('complete') > -1) {
                 target.parentElement.removeChild(target);
                 var newArr = array.filter(function(el, i){
@@ -180,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var localStorageTasks = JSON.parse(retrievedData);
 
     if(localStorageTasks.length === 0){
-        console.log('local storage is empty yet')
+        console.log('local storage is empty')
     } else {
         console.log(localStorageTasks);
         for (var i = 0; i < localStorageTasks.length; i++) {
@@ -191,9 +188,6 @@ document.addEventListener('DOMContentLoaded', function () {
             btnComplete.innerText = 'Wykonane';
             btnDelete.classList.add('btnDelete');
             btnComplete.classList.add('btnComplete');
-            // btnDelete.setAttribute("style", "background-color: rgba(255, 3, 21, 0.65);");
-            // btnComplete.setAttribute("style", "background-color: rgba(0, 128, 0, 0.65);");
-
 
             var newRow = table_body.insertRow();
 
