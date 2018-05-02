@@ -1,23 +1,18 @@
 # TO-DO-LIST
 
-## CEL
+## GOAL
 
-Wykonaliśmy dwie wersje projektu:
-index.html - która jest ładna, ale nie wszystko działa
-i wersjaBeta.html - która jest brzydka, ale działają przyciski.
+The goal of our group's work was to create responsive application. The tasks from to-to-list can be noted by the user, who can also set up the time, priority and short description of his goals. Tasks are saved in Local Storage. They can be deleted and removed when they are done.
 
-Celem pracy naszej grupy było stworzenie responsywnej aplikacji, służacej do zapisywania zadań. 
+You can see life preview here: https://majaanna.github.io/To-Do-List/
 
 
-### FUNKCJONALNOŚCI
-Uzupełniając konkretne zadanie, użytkownik określić powinien:
-* Czas wykonania zadania,
-* Tytuł,
-* Istotność zadania (poprzez określenie priorytetu w skali 1 - 5, gdzie 1 to najważniejsze, a 5 to najmniej istotne),
-* Opis zadania.
-
-Dzięki skorzystaniu z Local Storage użytkownik może wrócić do stworzonej przez siebie listy także po zamknięciu przeglądarki. 
-Uytkownik może filtrować zapisane przez siebie zadania, jak również usuwać je, oznaczać jako wykonane, a także usuwać te zadania, które udało mu się już wykonać.
+### FUNCTIONALITIES
+Creating his note, user should decide about:
+* note's title
+* deadline
+* priority (where 1 means - the most important and 5 means - the less important),
+* small description.
 
 ####
-Wykonali: Maja, Olek & Filip
+Done by: Maja, Olek & Filip
