@@ -161,13 +161,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function removeAllCompleteTasks(element, target, index, array) {
         element.addEventListener('click', function () {
-            console.log('click');
+
+            //it shows all newRows, because they are not distinguished
+            //console.log(target);
+
             if (target.className.indexOf('complete') > -1) {
+
+                //it shows target(newRow) with class 'complete'
+                console.log(target);
                 target.parentElement.removeChild(target);
-                var newArr = array.filter(function(el, i){
-                    return index !== i;
-                })
-                localStorage.setItem('tasks', JSON.stringify( newArr ) );
+
+                // var newArr = array.filter(function(el, i){
+                //     return index !== i;
+                // })
+                // localStorage.setItem('tasks', JSON.stringify( newArr ) );
                 // hideEmptyTable();
             }
 
