@@ -36,12 +36,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    function deleteTask(element, target) {
-        element.addEventListener('click', function () {
-            this.parentElement.parentElement.removeChild(this.parentElement);
-        });
-    }
-
     /*Show and Hide form for tasks*/
     hideShowFormBtn.addEventListener('click', function (e) {
         e.preventDefault();
@@ -154,6 +148,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     });
 
+    function deleteTask(element, index, array) {
+        element.addEventListener('click', function () {
+            var removeItem = this.parentElement;
+            removeItem.parentElement.removeChild(this.parentElement);
+            var newArr = array.filter(function(el, i){
+                return index !== i;
+            })
+            localStorage.setItem('tasks', JSON.stringify( newArr ) );
+        });
+    }
+
     function removeAllCompleteTasks(element, target, index, array) {
         element.addEventListener('click', function () {
             console.log('click');
@@ -196,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
         newRow.append(btnDelete);
 
         changeCompleteTaskColor(btnComplete, newRow);
-        deleteTask(btnDelete);
+        deleteTask(btnDelete, i, localStorageTasks);
         removeAllCompleteTasks(removeButton, newRow, i, localStorageTasks);
 
         if(localStorageTasks === null){
