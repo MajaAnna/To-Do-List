@@ -14,28 +14,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
         inputControl = document.getElementsByClassName('validation_required');
 
-    //table.hidden = true;
-    //removeButton.hidden = true;
+    table.hidden = true;
+    removeButton.hidden = true;
     form.hidden = true;
 
     function hideEmptyTable() {
-        // if (table_body.nextElementSibling.childElementCount === 6) {
-        //     table_top.hidden = false;
-        //     removeButton.hidden = false;
-        // } else {
-        //     table_top.hidden = true;
-        //     removeButton.hidden = true;
-        // }
-        if(localStorageTasks === null){
-            table.hidden = true;
-            table_top.hidden = true;
-            removeButton.hidden = true
-        } else {
-            table.hidden = false;
+        if (table_body.nextElementSibling.childElementCount === 6) {
             table_top.hidden = false;
             removeButton.hidden = false;
+        } else {
+            table_top.hidden = true;
+            removeButton.hidden = true;
         }
     }
+
 
     function changeCompleteTaskColor(element, target) {
         element.addEventListener('click', function () {
@@ -52,15 +44,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function removeAllCompleteTasks(element, target, array) {
         element.addEventListener('click', function () {
+            console.log('click');
             if (target.className.indexOf('complete') > -1) {
+                target.parentElement.removeChild(target);
                 var newArr = array.filter(function(el){
                     if (el === target) {
                         console.log(el !== target);
                         return el !== target;
                     }
                 })
-                array = newArr;
-                target.parentElement.removeChild(target);
                 localStorage.setItem('tasks', JSON.stringify( newArr ) );
                 hideEmptyTable();
             }
@@ -144,7 +136,6 @@ document.addEventListener('DOMContentLoaded', function () {
         form.hidden = !form.hidden;
 
 
-
         /* LOCAL STORAGE -------------------------------------------------------------------------------*/
         var localStorageTasks = JSON.parse(localStorage.getItem('tasks'));
         var newTask = {
@@ -172,7 +163,19 @@ document.addEventListener('DOMContentLoaded', function () {
         //     localStorage.clear();
         // })
 
+        function displayLocalStorage() {
+            if (localStorageTasks === null) {
+                table.hidden = true;
+                table_top.hidden = true;
+                removeButton.hidden = true
+            } else {
+                table.hidden = false;
+                table_top.hidden = false;
+                removeButton.hidden = false;
+            }
+        }
 
+        displayLocalStorage();
 
 
     });
@@ -204,10 +207,19 @@ document.addEventListener('DOMContentLoaded', function () {
         newRow.append(btnDelete);
 
         changeCompleteTaskColor(btnComplete, newRow);
-        deleteTask(btnDelete, newRow);
+        deleteTask(btnDelete);
         // removeAllCompleteTasks(removeButton, newRow);
-        removeAllCompleteTasks(removeButton, newRow, localStorageTasks);
-        hideEmptyTable()
+        removeAllCompleteTasks(removeButton, newRow, localStorage);
+
+        if(localStorageTasks === null){
+            table.hidden = true;
+            table_top.hidden = true;
+            removeButton.hidden = true
+        } else {
+            table.hidden = false;
+            table_top.hidden = false;
+            removeButton.hidden = false;
+        }
     }
 
 })
