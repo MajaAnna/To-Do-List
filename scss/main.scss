@@ -1,6 +1,7 @@
 $lightest-color:#e6e8e1;
 $darkest-color:#373331;
 $accent-color:#d18040;
+$second-color:#9CDEA5;
 $stronger-accent-color:#c44e47;
 $secondary-color:#c3afa0;
 $secondary-color-third: #c8ccd1;
@@ -12,6 +13,9 @@ html body{
 
 .bg-img {
   position: relative;
+}
+.mainContainer{
+  height:100vh;
 }
 .bg-img:after {
   content : "";
@@ -64,10 +68,11 @@ footer a:hover{
 
 table {
   text-align: center;
+  border-radius:5px;
 }
 
 #table_top {
-  background-color: rgba(190, 190, 190, 0.69);
+  background-color: rgba($secondary-color, 0.69);
 }
 
 textarea {
@@ -90,18 +95,17 @@ label {
 
 #form {
   margin: 0 auto;
-  width: 300px;
+  width: 50%;
 }
 
 .complete {
   background-color: transparent;
   td:not(:last-child) {
-    background-color: rgba(29, 222, 82, 0.81);
+    background-color: rgba($second-color, 0.81);
   }
 }
 
 button {
-  background-color: rgba(217, 213, 0, 0.65);
   border: none;
   color: white;
   padding: 10px 20px;
@@ -115,6 +119,30 @@ button {
 .help-block {
   color: rgb(0, 0, 0);
   font-style: oblique;
+}
+
+.btnAdd{
+  background-color: $second-color;
+  color:$darkest-color;
+  font-weight:bold;
+}
+
+.btnSave{
+  background-color:$accent-color;
+}
+
+.btnRemove{
+  background-color:rgba($accent-color, .9);
+}
+
+.btnComplete{
+  border-radius:5px;
+  background-color:$second-color;
+}
+
+.btnDelete{
+  background-color:$accent-color;
+  border-radius:5px;
 }
 
 

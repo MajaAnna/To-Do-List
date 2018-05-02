@@ -77,10 +77,13 @@ document.addEventListener('DOMContentLoaded', function () {
         btnDelete.innerText = 'Usunąć';
         btnComplete.innerText = 'Wykonane';
 
-        btnDelete.setAttribute("style", "background-color: rgba(255, 3, 21, 0.65);");
-        btnComplete.setAttribute("style", "background-color: rgba(0, 128, 0, 0.65);");
-        removeButton.setAttribute("style", "width: 100%");
+        // btnDelete.setAttribute("style", "background-color: rgba(255, 3, 21, 0.65);");
+        // btnComplete.setAttribute("style", "background-color: rgba(0, 128, 0, 0.65);");
+        // removeButton.setAttribute("style", "width: 100%");
         table_top.setAttribute("style", "background-color: #d18040");
+
+        btnDelete.classList.add('btnDelete');
+        btnComplete.classList.add('btnComplete');
 
         tdAdditionDate.innerText = additionDate.value;
         tdAuthor.innerText = authorName.value;
@@ -186,8 +189,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             btnDelete.innerText = 'Usunąć';
             btnComplete.innerText = 'Wykonane';
-            btnDelete.setAttribute("style", "background-color: rgba(255, 3, 21, 0.65);");
-            btnComplete.setAttribute("style", "background-color: rgba(0, 128, 0, 0.65);");
+            btnDelete.classList.add('btnDelete');
+            btnComplete.classList.add('btnComplete');
+            // btnDelete.setAttribute("style", "background-color: rgba(255, 3, 21, 0.65);");
+            // btnComplete.setAttribute("style", "background-color: rgba(0, 128, 0, 0.65);");
 
 
             var newRow = table_body.insertRow();
